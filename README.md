@@ -1,5 +1,4 @@
 # Fridge.js
----
 
 Bringing Fridge magnets to the browser.
 

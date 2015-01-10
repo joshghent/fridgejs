@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fridge</title>
-
+  <!-- App scripts -->
   <!-- Bootstrap -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
@@ -18,14 +18,17 @@
   <![endif]-->
 </head>
 <body>
-  <nav class="navbar navbar-default navbar-fixed-top">
+  <script src="js/addMagnet.js" type="text/javascript"></script>
+  <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
       <a class="navbar-brand" href="#">Fridge.js</a>
       <ul class="pull-right">
-        <div class="addTask"><li><a href="#">+</a></li></div>
+        <button type="button" class="btn btn-default navbar-btn addTask" onClick=addMagnet("fridge", document.fridgeContent.value)>+</button>
       </ul>
     </div>
   </nav>
+  <textarea id="fridgeContent" placeholder="Type text here then press the + button to add it below."></textarea>
+  <div class="fridge"></div>
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

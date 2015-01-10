@@ -1,12 +1,8 @@
 /* TODO: Add CSS */
 
-body {
-  padding-top: 70px;
-}
-
-div.addTask {
+/*button.addTask {
   font-size: 25px;
-}
+} */
 
 ul {
   list-style-type: none;

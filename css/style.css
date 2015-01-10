@@ -1,0 +1,13 @@
+/* TODO: Add CSS */
+
+body {
+  padding-top: 70px;
+}
+
+div.addTask {
+  font-size: 25px;
+}
+
+ul {
+  list-style-type: none;
+}

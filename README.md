@@ -1,11 +1,11 @@
 # Fridge.js
----
 
 Bringing Fridge magnets to the browser.
 
 
 ## Dependencies
 * Gruntjs
+* Bootstrap
 
 ## Contributing
 1. [Fork it](https://help.github.com/articles/fork-a-repo)

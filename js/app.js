@@ -1,11 +1,11 @@
 var main = function() {
 
   $('.btn').click(function submit() {
-    var add = $('.magnet-box').val();
-    $('<li>').text(add).prependTo('.magnets');
-    $('.magnet-box').val('');
-    $('.counter').text('0');
-    $('.magnet-box').focus();
+    var add = $('.magnet-box').val(); // Get the value of the input
+    $('<li>').text(add).prependTo('.magnets'); // Add that value to a new li element
+    $('.magnet-box').val(''); // Reset the value of the input to blank
+    $('.counter').text('0'); // Reset the character counter
+    $('.magnet-box').focus(); // Refocus the text box after submit
   });
   $('.magnet-box').keyup(function() {
     var magnetLength = $(this).val().length;
@@ -15,7 +15,7 @@ var main = function() {
   $('.magnet-box').keypress(function(e) {
     if (e.which == 13) {
       $('.btn').submit();
-      return false; //<---- Add this line
+      return false;
     }
   });
   $(function() {

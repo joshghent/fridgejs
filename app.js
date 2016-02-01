@@ -1,4 +1,4 @@
-var main = function() {
+function main() {
 
   $('.btn').click(function submit() {
     var add = $('.magnet-box').val(); // Get the value of the input
@@ -7,7 +7,7 @@ var main = function() {
     $('.counter').text('0'); // Reset the character counter
     $('.magnet-box').focus(); // Refocus the text box after submit
   });
-  $('.magnet-box').keyup(function() {
+  $('.magnet-box').keypress(function() {
     var magnetLength = $(this).val().length;
     var characterAmount = 0 + magnetLength;
     $('.counter').text(characterAmount);
@@ -18,9 +18,15 @@ var main = function() {
       return false;
     }
   });
+  $('.magnets').on('click', 'li', function() { // Doesn't delete the class correctly.
+    $(this).removeClass('li');
+  });
   $(function() {
     $('.magnet-box').focus();
   });
 };
 
 $(document).ready(main);
+
+
+

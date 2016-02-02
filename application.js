@@ -36,10 +36,12 @@ function add_magnet_to_magnets_list() {
 
     magnets_list.push(new_magnet);
 
+    localStorage.setItem('magnets_list', JSON.stringify(magnets_list));
+
     $('.magnet_box').val('');
     $('.magnet_box').focus();
     $('.counter').text('0');
-    
+
     render();
 }
 
@@ -63,20 +65,32 @@ function render() {
     // First clear the list to ensure we do not get duplicates.
     // I will update this eventually so it only renders new notes rather than all of them
     $('.magnets').empty();
-    
+
+    var magnets_list_from_localstorage = JSON.parse(localStorage.getItem('magnets_list'));
+
+    /*var array_to_render_from = $.merge(magnets_list, magnets_list_from_localstorage);*/
     // Loop through the array
-    for (var i = 0; i < magnets_list.length; i++) {
+    if (magnets_list_from_localstorage != null) {
+        for (var i = 0; i < magnets_list_from_localstorage.length; i++) {
 
-        // Get the attributes we want from the objects
-        var id = magnets_list[i].magnet_id;
-        var magnet_text = magnets_list[i].magnet_text;
+            // Get the attributes we want from the objects
+            var id = magnets_list_from_localstorage[i].magnet_id;
+            var magnet_text = magnets_list_from_localstorage[i].magnet_text;
 
-        $('.magnets').append(
-            $('<li/>')
-            .attr('id', id)
-            .text(magnet_text)
-        );
+            $('.magnets').append(
+                $('<li/>')
+                .attr('id', id)
+                .text(magnet_text)
+            );
+        }
     }
+
 }
 
-$(document).ready(render);
+$(document).ready(function() {
+    if (localStorage.getItem('magnets_list') != null) {
+        magnets_list = JSON.parse(localStorage.getItem('magnets_list'));
+    }
+
+    render();
+});

@@ -2,8 +2,8 @@
 // using localStorage
 var magnets_list = [];
 
-$('.magnet_box').keypress(function(e){
-    if(e.which == 13){
+$('.magnet_box').keypress(function(e) {
+    if (e.which == 13) {
         $('#add_magnet_button').click();
     }
 })
@@ -18,32 +18,34 @@ $('.magnet_box').keypress(magnet_length_character_counter);
 // at the same time then the counter will not update correctly.
 $('.magnet_box').keyup(magnet_length_character_counter);
 
-function magnet_length_character_counter(){
+function magnet_length_character_counter() {
     var magnet_length = $(this).val().length;
     var character_count = 0 + magnet_length;
-    $('.counter').text(character_count); 
+    $('.counter').text(character_count);
 }
 
-function add_magnet_to_magnets_list(){
+function add_magnet_to_magnets_list() {
     var magnet_text = $('.magnet_box').val();
-    
+
     // Create a new object to store the magnets content in
     var new_magnet = {};
     // Set the magnet_text key equal to the value of the input field on the page
     new_magnet.magnet_text = magnet_text;
     // Give the magnet a unique id
     new_magnet.magnet_id = generate_id();
-    
+
     magnets_list.push(new_magnet);
-    
+
     $('.magnet_box').val('');
     $('.magnet_box').focus();
     $('.counter').text('0');
+    
+    render();
 }
 
-function generate_id(){
+function generate_id() {
     var id = 0;
-    if(localStorage.getItem('id')){
+    if (localStorage.getItem('id')) {
         // Set the id variable to the localstorage value to an integer
         id = parseInt(localStorage.getItem('id'));
     }
@@ -57,8 +59,24 @@ function generate_id(){
 }
 
 // This function will be called every time there is an update to the magnets_list array
-function render(){
+function render() {
+    // First clear the list to ensure we do not get duplicates.
+    // I will update this eventually so it only renders new notes rather than all of them
+    $('.magnets').empty();
     
+    // Loop through the array
+    for (var i = 0; i < magnets_list.length; i++) {
+
+        // Get the attributes we want from the objects
+        var id = magnets_list[i].magnet_id;
+        var magnet_text = magnets_list[i].magnet_text;
+
+        $('.magnets').append(
+            $('<li/>')
+            .attr('id', id)
+            .text(magnet_text)
+        );
+    }
 }
 
 $(document).ready(render);

@@ -18,9 +18,11 @@ $('.magnet_box').keypress(magnet_length_character_counter);
 // at the same time then the counter will not update correctly.
 $('.magnet_box').keyup(magnet_length_character_counter);
 
+// This function handles the character counter besides the add button
 function magnet_length_character_counter() {
-    var magnet_length = $(this).val().length;
-    var character_count = 0 + magnet_length;
+    // Get the length of the value in the input box
+    var character_count = $(this).val().length;
+    // Set the character counter equal to the character_count variable
     $('.counter').text(character_count);
 }
 
@@ -33,18 +35,26 @@ function add_magnet_to_magnets_list() {
     new_magnet.magnet_text = magnet_text;
     // Give the magnet a unique id
     new_magnet.magnet_id = generate_id();
-
+    
+    // Push the object to the magnets_list array
     magnets_list.push(new_magnet);
 
+    // Save that magnets_list array to localstorage
+    // We stringify it because localstorage only accepts strings
     localStorage.setItem('magnets_list', JSON.stringify(magnets_list));
-
+    
+    // Set the value back to nothing
     $('.magnet_box').val('');
+    // Refocus the input
     $('.magnet_box').focus();
+    // Set the counter back to zero
     $('.counter').text('0');
 
     render();
 }
 
+// This function will generate unique ids starting from 0.
+// It simply returns an id and uses localstorage to ensure there will be no clashing id's
 function generate_id() {
     var id = 0;
     if (localStorage.getItem('id')) {
@@ -65,18 +75,22 @@ function render() {
     // First clear the list to ensure we do not get duplicates.
     // I will update this eventually so it only renders new notes rather than all of them
     $('.magnets').empty();
-
+    
+    // Retrieve the magnets list from localstorage
     var magnets_list_from_localstorage = JSON.parse(localStorage.getItem('magnets_list'));
 
     /*var array_to_render_from = $.merge(magnets_list, magnets_list_from_localstorage);*/
-    // Loop through the array
+    
+    // Ensure that the localstorage is not null
     if (magnets_list_from_localstorage != null) {
+        // Loop through the array
         for (var i = 0; i < magnets_list_from_localstorage.length; i++) {
 
             // Get the attributes we want from the objects
             var id = magnets_list_from_localstorage[i].magnet_id;
             var magnet_text = magnets_list_from_localstorage[i].magnet_text;
 
+            // Append the magnet to the UL list of .magnets
             $('.magnets').append(
                 $('<li/>')
                 .attr('id', id)
@@ -88,9 +102,15 @@ function render() {
 }
 
 $(document).ready(function() {
+    // Check if the localstorage returns null, this will occur if the localstorage is cleared or there is a new user
     if (localStorage.getItem('magnets_list') != null) {
+        // Set the magnets_list array equal to the localstorage objects
+        // We do this to ensure that new items added after reload do not wipe localstorage items
+        // It occured because we are setting the localstorage based on the magnets_list array when we add a new magnet
+        // Therefore, on initial load we need to insert the old magnets into the magnets_list array to ensure
+        // that all magnets will be saved.
         magnets_list = JSON.parse(localStorage.getItem('magnets_list'));
     }
-
+    
     render();
 });

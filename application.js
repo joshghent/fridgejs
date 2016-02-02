@@ -31,6 +31,8 @@ function add_magnet_to_magnets_list(){
     var new_magnet = {};
     // Set the magnet_text key equal to the value of the input field on the page
     new_magnet.magnet_text = magnet_text;
+    // Give the magnet a unique id
+    new_magnet.magnet_id = generate_id();
     
     magnets_list.push(new_magnet);
     
@@ -39,11 +41,24 @@ function add_magnet_to_magnets_list(){
     $('.counter').text('0');
 }
 
+function generate_id(){
+    var id = 0;
+    if(localStorage.getItem('id')){
+        // Set the id variable to the localstorage value to an integer
+        id = parseInt(localStorage.getItem('id'));
+    }
+    id++;
+    // Make a new variable that will store a string version since localstorage only accepts strings.
+    var id_to_string = id.toString();
+    // Store the id variably locally so it does not get reset to zero
+    localStorage.setItem('id', id_to_string);
+
+    return id;
+}
+
 // This function will be called every time there is an update to the magnets_list array
 function render(){
     
 }
 
-$(document).ready(function(){
-    
-});
+$(document).ready(render);

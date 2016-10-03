@@ -1,6 +1,6 @@
 # Fridgejs
 ---
 
-Status: In development - There has not been a stable release so far.
+Fridgejs is a small js application designed to mimic post it notes on a fridge. It is similar to Google Keep or other Post it Note like applications.
 
-Fridgejs is a small js application designed to mimic fridge magnets.
+See it live [here](http://joshghent.github.io/fridgejs/)

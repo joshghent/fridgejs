@@ -1,6 +1,7 @@
-# Fridgejs
----
+# Sticky Notes
 
-Fridgejs is a small js application designed to mimic post it notes on a fridge. It is similar to Google Keep or other Post it Note like applications.
+Keep track of your thoughts - locally. 
+
+A lightweight local alternative to google keep, Notes allows you to store any random peices of information right where you need.
 
 See it live [here](http://joshghent.github.io/fridgejs/)

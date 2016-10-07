@@ -116,4 +116,16 @@ $(document).ready(function() {
         var element = $(event.target);
         $(element).attr('contentEditable', 'true');
     });
+
+    $('.magnets li').on('blur', function(event) {
+        var element_id = event.target.id;
+        var element = $(event.target)[0];
+        var new_note_value = $(element).text();
+
+        magnets_list[element_id -1].magnet_text = new_note_value;
+
+        // Save that magnets_list array to localstorage
+        // We stringify it because localstorage only accepts strings
+        localStorage.setItem('magnets_list', JSON.stringify(magnets_list));
+    });
 });

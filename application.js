@@ -78,8 +78,6 @@ function render() {
     
     // Retrieve the magnets list from localstorage
     var magnets_list_from_localstorage = JSON.parse(localStorage.getItem('magnets_list'));
-
-    /*var array_to_render_from = $.merge(magnets_list, magnets_list_from_localstorage);*/
     
     // Ensure that the localstorage is not null
     if (magnets_list_from_localstorage != null) {
@@ -113,4 +111,21 @@ $(document).ready(function() {
     }
     
     render();
+
+    $('.magnets li').on('click', function(event) {
+        var element = $(event.target);
+        $(element).attr('contentEditable', 'true');
+    });
+
+    $('.magnets li').on('blur', function(event) {
+        var element_id = event.target.id;
+        var element = $(event.target)[0];
+        var new_note_value = $(element).text();
+
+        magnets_list[element_id -1].magnet_text = new_note_value;
+
+        // Save that magnets_list array to localstorage
+        // We stringify it because localstorage only accepts strings
+        localStorage.setItem('magnets_list', JSON.stringify(magnets_list));
+    });
 });
